@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { FC, useReducer } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import Input from '../Components/Input'
 import './App.css'
-import { AppContext } from './appReducer'
+import { AppContext, appReducer, initialState } from './appReducer'
 
 const theme = {
   fontBold: 'bold 18px Helvetica Neue',
@@ -17,19 +17,20 @@ const H = styled.div`
   color: ${(props) => props.color ? props.theme[props.color] : 'black'}
 `
 
-const App: React.FC = () => {
+const App: FC = () => {
+  const [state, dispatch] = useReducer(appReducer, initialState)
   return (
-    <ThemeProvider theme={theme}>
-      <AppContext.Provider>
+    <AppContext.Provider value={{ state, dispatch }}>
+      <ThemeProvider theme={theme}>
         <div className='App'>
           <div className='header'>
             <H color='primary'>hey</H>
             <H color='secondary'>cinema</H>
           </div>
-          <div className='search'><Input /></div>
+          <div className='search'><Input/></div>
         </div>
-      </AppContext.Provider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </AppContext.Provider>
   )
 }
 

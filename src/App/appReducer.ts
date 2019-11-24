@@ -1,14 +1,10 @@
 import { createContext, Dispatch } from 'react'
 
-const initialData = {
+export const initialState = {
   Poster: '',
-  Ratings: '',
+  Ratings: [],
   Title: '',
   Year: '',
-}
-
-export const initialState = {
-  data: initialData
 }
 
 export enum ActionType {
@@ -30,9 +26,10 @@ export const AppContext = createContext({} as IContextProps)
 export function appReducer(state: any, action: IAction) {
   switch (action.type) {
     case ActionType.SET_DATA:
+      const { Poster, Ratings, Title, Year } = action.data
       return {
         ...state,
-        data: action.data
+        Poster, Ratings, Title, Year
       }
     default:
       return state

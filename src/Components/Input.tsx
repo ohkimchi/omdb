@@ -10,20 +10,28 @@ const Input: FC = () => {
   const [search, setSearch] = useState('')
   const { dispatch } = useContext(AppContext)
 
-  async function searching() {
-    axios.get(api + '&&t=' + search).then(async (res) => {
-      console.log(search, res)
-      dispatch({
-        data: res,
-        type: ActionType.SET_DATA
-      })
+  async function searching(text: string) {
+    axios.get(api + '&&t=' + text).then(async (res) => {
+      if (search.length > 0) {
+        console.log(text, res)
+        const {data} = res
+        console.log('data', data)
+        const { Title } = data
+        console.log(Title, 'Title')
+        dispatch({
+          data,
+          type: ActionType.SET_DATA
+        })
+      }
     })
   }
 
   const handleOnChange = debounce(async (text: string) => {
-    setSearch(text)
-    await searching()
-  }, 2000)
+    if (text.length > 0) {
+      await setSearch(text)
+      await searching(text)
+    }
+  }, 1000)
 
   return (
     <div>

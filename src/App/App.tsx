@@ -3,6 +3,7 @@ import styled, { ThemeProvider } from 'styled-components'
 import Input from '../Components/Input'
 import './App.css'
 import { AppContext, appReducer, initialState } from './appReducer'
+import {Tile} from "../Components/Tile"
 
 const theme = {
   fontBold: 'bold 18px Helvetica Neue',
@@ -19,6 +20,7 @@ const H = styled.div`
 
 const App: FC = () => {
   const [state, dispatch] = useReducer(appReducer, initialState)
+  console.log('state', state)
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <ThemeProvider theme={theme}>
@@ -28,6 +30,7 @@ const App: FC = () => {
             <H color='secondary'>cinema</H>
           </div>
           <div className='search'><Input/></div>
+          <Tile />
         </div>
       </ThemeProvider>
     </AppContext.Provider>

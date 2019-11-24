@@ -3,13 +3,20 @@ import { AppContext } from '../App/appReducer'
 
 export const Tile: FC = () => {
   const { state } = useContext(AppContext)
-  const { data } = state
-  const { Poster, Title, Ratings, Year } = data
+  const { Poster, Title, Ratings, Year } = state
   return (
     <div>
       <img src={Poster} alt=''/>
       <div>{Title}</div>
-      <div>{Ratings}</div>
+      {Ratings.map((r) => {
+        const { Source, Value } = r
+        return (
+          <div>
+            <div>{Source}</div>
+            <div>{Value}</div>
+          </div>
+        )
+      })}
       <div>{Year}</div>
     </div>
   )

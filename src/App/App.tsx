@@ -1,9 +1,9 @@
 import React, { FC, useReducer } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
-import Input from '../Components/Input'
+import Input from '../Components/Input/Input'
+import { Tile } from '../Components/Tile/Tile'
 import './App.css'
 import { AppContext, appReducer, initialState } from './appReducer'
-import {Tile} from "../Components/Tile"
 
 const theme = {
   fontBold: 'bold 18px Helvetica Neue',
@@ -13,14 +13,23 @@ const theme = {
   tertiary: '#34283F'
 }
 
-const H = styled.div`
+export const H = styled.div`
   font: ${(props) => props.theme.fontBold};
   color: ${(props) => props.color ? props.theme[props.color] : 'black'}
 `
 
+export const CallOut = styled.div`
+  font: ${(props) => props.theme.fontRegular};
+  color: ${(props) => props.color ? props.theme[props.color] : 'black'}
+`
+
+export const Subtitle = styled.div`
+  font: ${(props) => props.theme.fontRegular};
+  color: ${(props) => props.color ? props.theme[props.color] : 'grey'}
+`
+
 const App: FC = () => {
   const [state, dispatch] = useReducer(appReducer, initialState)
-  console.log('state', state)
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <ThemeProvider theme={theme}>
@@ -30,7 +39,7 @@ const App: FC = () => {
             <H color='secondary'>cinema</H>
           </div>
           <div className='search'><Input/></div>
-          <Tile />
+          <div className='result'><Tile /></div>
         </div>
       </ThemeProvider>
     </AppContext.Provider>

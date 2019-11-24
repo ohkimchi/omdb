@@ -1,3 +1,15 @@
 .App {
     margin: 10vw 10vh
 }
+
+.search {
+    margin-top: 5vh;
+}
+
+.react-search-field {
+    width: 100%;
+}
+
+.result {
+    margin-top: 5vh;
+}
